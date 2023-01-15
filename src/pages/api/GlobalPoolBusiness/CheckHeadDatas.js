@@ -30,12 +30,14 @@ export default async(req,res)=>{
     
 
     // const RankBonusHistoryData = await RankBonusHistory.find({UpperLineUserId:id,created_on: {$gte: start, $lt: end}})
-    const RankBonusHistoryData = await RankEligibilityClaim.find({created_on: {$gte: start, $lt: end}})
+    const RankBonusHistoryData = await PackageHistory.find({created_on: {$gte: start, $lt: end}})
+
+    console.log(RankBonusHistoryData)
 
 
 
     RankBonusHistoryData.map((hit)=>{
-        return TotalBusiness = TotalBusiness + Number(hit.TotBusiness)
+        return TotalBusiness = TotalBusiness + Number(hit.PackagePrice)
     })
 
 
