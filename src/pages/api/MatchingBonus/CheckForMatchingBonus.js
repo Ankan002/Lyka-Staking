@@ -132,6 +132,7 @@ export default async (req, res) => {
 
                 console.log("second time this user Left =>"+leftBusiness)
                 console.log("second time this user Righ =>"+rightBusiness)
+                var combo = Number(leftBusiness) + Number(rightBusiness)
 
                 if (leftBusiness >= Number(PackPrice) && rightBusiness >= Number(PackPrice)) {
 
@@ -154,7 +155,7 @@ export default async (req, res) => {
                     const CreateRecord = await MatchingBonusHistory({
                         BonusOwner:FindAllUsers[index]._id,
                         Amount:packPercantage,
-                        Matching:PackPrice,
+                        Matching:combo,
                         Rate:"8%"
                     }).save()
 
