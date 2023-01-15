@@ -110,7 +110,7 @@ export default async (req, res) => {
 
     if (Number(myOldWallet.PurchasedPackagePrice) > 0) {
 
-      console.log("came to create record ===> ")
+     
       const GiveReawdToUpperUpper = await RebuyBonus({
         BonusOwner:upperlineUserData._id,
         ReferSentFromId:myOldWallet._id,
