@@ -10,6 +10,7 @@ initDB()
 export default async(req,res)=>{
 
     const {id} = req.body;
+   
 
     var myDate = new Date()
 
@@ -38,6 +39,9 @@ export default async(req,res)=>{
     })
 
 
+    console.log(TotalBusiness)
+
+
     
     
     const findMainUserPackage = await User.findById(id)
@@ -45,7 +49,11 @@ export default async(req,res)=>{
     
     const mainUserPackagePrice = Number(findMainUserPackage.PurchasedPackagePrice)
 
-    const rankEligibleForThatPackage = await RankBonusHistoryData.find({PackageOwnPrice:mainUserPackagePrice})
+    console.log("pack price is => "+mainUserPackagePrice)
+    
+    const rankEligibleForThatPackage = await RankEligibilityClaim.find({PackageOwnPrice:mainUserPackagePrice})
+    console.log(rankEligibleForThatPackage)
+    console.log("it is comided here")
 
     
 
@@ -108,9 +116,11 @@ export default async(req,res)=>{
 
 
 
+
+
     
     
-    res.json({companyBusiness:TotalBusiness,memberEligibleForRank:memberEligible,estimatedToken:est1,fromDate:`1/${esDate.getMonth()+1}/${esDate.getFullYear()}`,toDate:`${esDate.getDate()}/${esDate.getMonth()+1}/${esDate.getFullYear()}`,packageStar:star})
+    res.json({companyBusiness:TotalBusiness,memberEligibleForRank:memberEligible,estimatedToken:est1,fromDate:`1/${esDate.getMonth()+1}/${esDate.getFullYear()}`,toDate:`1/${esDate.getMonth()+1}/${esDate.getFullYear()}`,packageStar:star})
 
 
 }

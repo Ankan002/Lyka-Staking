@@ -19,8 +19,6 @@ export default async (req, res) => {
     console.log(users[index]._id)
     var mainUser = users[index]._id
 
-
-
     var myDate = new Date()
 
     var myDay = 1
@@ -56,7 +54,6 @@ export default async (req, res) => {
     })
 
     // elegiblePeoples
-
 
     const memberEligible = RankBonusHistoryData.length // this is the count of eligible 
 
