@@ -5,6 +5,7 @@ import LykaFastBonus from '../../helper/Modal/Bonus/LykaFastBonus'
 import User from '../../helper/Modal/User'
 import LykaFastBonusHis from '../../helper/Modal/History/LykaFastBonusHis'
 import RenewalPurchasePackage from '../../helper/Modal/Renewal/RenewalPurchasePackage'
+import RebuyBonus from '../../helper/Modal/Bonus/RebuyBonus'
 
 initDB()
 
@@ -96,12 +97,30 @@ export default async (req, res) => {
 
     var finalCal = (Number(investedAmount) * per) / 100
 
+    var refDef = finalCal*3/100
+
 
     var myWallete = myOldWallet.MainWallet
 
     var finalWallete = Number(myWallete) + Number(finalCal)
 
     await User.findByIdAndUpdate({ _id: list[i].id }, { MainWallet: finalWallete })
+
+    const upperlineUserData = await User.findById(myOldWallet.UpperlineUser)
+
+    if (Number(myOldWallet.PurchasedPackagePrice) > 0) {
+
+      console.log("came to create record ===> ")
+      const GiveReawdToUpperUpper = await RebuyBonus({
+        BonusOwner:upperlineUserData._id,
+        ReferSentFromId:myOldWallet._id,
+        ReferSentFromUserId:myOldWallet.UserName,
+        ReferGetFromId:upperlineUserData._id,
+        ReferGetFromUserId:upperlineUserData.UserName,
+        PackName:upperlineUserData.PurchasedPackageName,
+        EarnedRewardCoins:refDef
+      }).save()
+    }
 
 
 
@@ -115,6 +134,10 @@ export default async (req, res) => {
           PackagePercantage: per,
           Amount: finalCal
         }).save()
+
+
+
+
       } else {
         const createRecord = await DailyBonus({
           BonusOwner: list[i].id,
@@ -122,6 +145,17 @@ export default async (req, res) => {
           PackagePercantage: per,
           Amount: finalCal
         }).save()
+
+
+        // const GiveReawdToUpperUpper = await RebuyBonus({
+        //   BonusOwner:upperlineUserData._id,
+        //   ReferSentFromId:myOldWallet._id,
+        //   ReferSentFromUserId:myOldWallet.UserName,
+        //   ReferGetFromId:upperlineUserData._id,
+        //   ReferGetFromUserId:upperlineUserData.UserName,
+        //   PackName:upperlineUserData.PurchasedPackageName,
+        //   EarnedRewardCoins:refDef
+        // }).save()
       }
 
 

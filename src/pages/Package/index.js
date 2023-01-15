@@ -54,8 +54,7 @@ const MUITable = () => {
       axios
         .get('/api/Package/getAllPackages')
         .then(acc => {
-          console.log('below is my data')
-          console.log(acc.data)
+        
           setDatas(acc.data)
         })
         .catch(err => {
@@ -77,7 +76,7 @@ const MUITable = () => {
         id:parsedData._id
       })
       .then((acc)=>{
-        console.log(acc.data)
+       
         setMyPackagePrice(acc.data)
       })
       .catch((err)=>{
@@ -110,7 +109,7 @@ const MUITable = () => {
           id: parseData._id
         })
         .then(acc => {
-          console.log(acc.data)
+        
           getData()
           window.alert('Package Created Successfuly')
         })

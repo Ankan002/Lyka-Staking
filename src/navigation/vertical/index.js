@@ -88,6 +88,11 @@ const navigation = () => {
       icon: AccountCogOutline,
       path: '/DirectReferal'
     },
+    {
+      title: 'Rebuy Bonus',
+      icon: AccountCogOutline,
+      path: '/RebuyBonus'
+    },
 
     // {
     //   sectionTitle: 'Pages'

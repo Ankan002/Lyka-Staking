@@ -33,14 +33,14 @@ export default async (req, res) => {
 
     const uplineUser = findPackagePurchaseUser.UpperlineUser
 
-    console.log(uplineUser)
+   
 
     if (uplineUser !== 'null') {
       var findUplineUserDetails = await User.findById(uplineUser)
 
       checkRenewalPackage = await RenewalPurchasePackage.find({ PackageOwner: uplineUser })
 
-      console.log(checkRenewalPackage)
+     
 
       const lastWallete = findUplineUserDetails.MainWallet
 
@@ -68,19 +68,18 @@ export default async (req, res) => {
       var creationDate = month + '/' + date.getDate() + '/' + date.getFullYear()
       var todayDate = month2 + '/' + dateToday.getDate() + '/' + dateToday.getFullYear()
 
-      console.log(creationDate)
-      console.log(todayDate)
+    
 
       const date1 = new Date(creationDate)
       const date2 = new Date(todayDate)
       const diffTime = Math.abs(date2 - date1)
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-      console.log(diffDays + ' days')
+     
 
       if (diffDays <= 10) {
         const findData = await LykaFastBonus.find({ FastBonusCandidate: uplineUser })
 
-        console.log(findData)
+      
 
         if (findData.length !== 0) {
           const updateData = await LykaFastBonus.findByIdAndUpdate(
@@ -196,7 +195,6 @@ export default async (req, res) => {
 
     const uplineUser = findPackagePurchaseUser.UpperlineUser
 
-    console.log(uplineUser)
 
     if (uplineUser !== 'null') {
       var findUplineUserDetails = await User.findById(uplineUser)
@@ -227,19 +225,17 @@ export default async (req, res) => {
       var creationDate = month + '/' + date.getDate() + '/' + date.getFullYear()
       var todayDate = month2 + '/' + dateToday.getDate() + '/' + dateToday.getFullYear()
 
-      console.log(creationDate)
-      console.log(todayDate)
 
       const date1 = new Date(creationDate)
       const date2 = new Date(todayDate)
       const diffTime = Math.abs(date2 - date1)
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-      console.log(diffDays + ' days')
+    
 
       if (diffDays <= 10) {
         const findData = await LykaFastBonus.find({ FastBonusCandidate: uplineUser })
 
-        console.log(findData)
+        
 
         if (findData.length !== 0) {
           const updateData = await LykaFastBonus.findByIdAndUpdate(
@@ -323,10 +319,13 @@ export default async (req, res) => {
 
 
     const updateDataS = await RankEligibilityClaim.findOne({RankEligibilityClaimOwnerId:id})
+    
 
     // const updatesdatas = await RankEligibilityClaim.findByIdAndUpdate({_id:updateDataS._id},{})
+    if (updateDataS !== null) {
+      const deleteOldData = await RankEligibilityClaim.findByIdAndDelete(updateDataS._id)
+    }
 
-    const deleteOldData = await RankEligibilityClaim.findByIdAndDelete(updateDataS._id)
 
 
 
